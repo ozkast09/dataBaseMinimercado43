@@ -11,6 +11,8 @@ package com.mycompany.inventariobodega;
 public class InventarioBodega {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        com.mycompany.inventariobodega.forms.paginaPrincipal objetoFormulario=new com.mycompany.inventariobodega.forms.paginaPrincipal();
+        objetoFormulario.setVisible(true);
+        
     }
 }
