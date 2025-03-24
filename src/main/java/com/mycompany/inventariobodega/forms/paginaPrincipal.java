@@ -17,6 +17,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
      */
     public paginaPrincipal() {
         initComponents();
+
     }
 
     /**
@@ -32,7 +33,8 @@ public class paginaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jPanel2 = new javax.swing.JPanel();
-        JpanelContenido = new javax.swing.JPanel();
+        panelContenido = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         JMenu = new javax.swing.JMenu();
         JInventario = new javax.swing.JMenu();
@@ -50,18 +52,22 @@ public class paginaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        JpanelContenido.setBackground(new java.awt.Color(255, 255, 255));
-        JpanelContenido.setLayout(new java.awt.BorderLayout());
+        panelContenido.setBackground(new java.awt.Color(255, 255, 255));
+        panelContenido.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Bienvenido usuario");
+        panelContenido.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JpanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JpanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         JMenu.setText("Menu");
@@ -79,6 +85,11 @@ public class paginaPrincipal extends javax.swing.JFrame {
         JMenu.add(JVencimiento);
 
         JNuevo.setText("Nuevo producto");
+        JNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JNuevoMouseClicked(evt);
+            }
+        });
         JNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JNuevoActionPerformed(evt);
@@ -108,12 +119,16 @@ public class paginaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JNuevoActionPerformed
-        JpanelContenido.removeAll();
-        nuevoProducto panelProducto=new nuevoProducto();
-        JpanelContenido.add(panelProducto,BorderLayout.CENTER);
-        JpanelContenido.revalidate();
-        JpanelContenido.repaint();
+        
     }//GEN-LAST:event_JNuevoActionPerformed
+
+    private void JNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JNuevoMouseClicked
+       panelContenido.removeAll();
+        nuevoProducto panelProducto = new nuevoProducto();
+        panelContenido.add(panelProducto, BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }//GEN-LAST:event_JNuevoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -157,12 +172,13 @@ public class paginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu JNuevo;
     private javax.swing.JMenu JSacar;
     private javax.swing.JMenu JVencimiento;
-    private javax.swing.JPanel JpanelContenido;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel panelContenido;
     // End of variables declaration//GEN-END:variables
 }
