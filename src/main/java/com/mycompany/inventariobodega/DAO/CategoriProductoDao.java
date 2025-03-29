@@ -5,7 +5,7 @@
 package com.mycompany.inventariobodega.DAO;
 
 
-import com.mycompany.inventariobodega.entidades.MedidaProducto;
+import com.mycompany.inventariobodega.entidades.CategoriaProducto;
 import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 
@@ -13,12 +13,12 @@ import jakarta.persistence.EntityManager;
  *
  * @author OSCAR
  */
-public class MedidaProductoDao {
-     public void guardar(MedidaProducto medidaProducto) {
+public class CategoriProductoDao {
+     public void guardar(CategoriaProducto categoriaProducto) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(medidaProducto);
+            em.persist(categoriaProducto);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -30,11 +30,11 @@ public class MedidaProductoDao {
             }
         }
     }
-     public MedidaProducto obtenerPorMedida(String medida) {
+     public CategoriaProducto obtenerPorCategoria(String categoria) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
-            return em.createQuery("SELECT m FROM MedidaProducto m WHERE m.medida = :medida", MedidaProducto.class)
-                    .setParameter("medida", medida)
+            return em.createQuery("SELECT c FROM CategoriaProducto c WHERE c.categoria = :categoria", CategoriaProducto.class)
+                    .setParameter("categoria", categoria)
                     .getResultStream()
                     .findFirst()
                     .orElse(null);
@@ -44,5 +44,6 @@ public class MedidaProductoDao {
             }
         }
     }
-    
 }
+    
+

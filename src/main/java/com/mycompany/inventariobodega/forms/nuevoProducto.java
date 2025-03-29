@@ -4,17 +4,58 @@
  */
 package com.mycompany.inventariobodega.forms;
 
+
+
+import com.mycompany.inventariobodega.DAO.NombreProductoDao;
+import com.mycompany.inventariobodega.DAO.ProveedorProductoDao;
+import com.mycompany.inventariobodega.DAO.UbicacionProductoDao;
+
+
+import com.mycompany.inventariobodega.entidades.NombreProducto;
+import com.mycompany.inventariobodega.entidades.ProveedorProducto;
+import com.mycompany.inventariobodega.entidades.UbicacionProducto;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author OSCAR
  */
 public class nuevoProducto extends javax.swing.JPanel {
 
+    
+   
+    private NombreProductoDao nombreProductoDao;
+    private ProveedorProductoDao proveedorProductoDao;
+    private UbicacionProductoDao ubicacionProductoDao;
+
     /**
      * Creates new form nuevoProducto
      */
     public nuevoProducto() {
         initComponents();
+
+       
+        
+        nombreProductoDao = new NombreProductoDao();
+        proveedorProductoDao = new ProveedorProductoDao();
+        ubicacionProductoDao = new UbicacionProductoDao();
+
+        // Obtener datos de los JTextField
+        String nombreProducto = nombre.getText();
+
+        
+       
+        String ubicacionProducto = ubicacion.getText();
+        String proveedorProducto = proveedor.getText();
+
+        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarMouseClicked(evt);
+            }
+        });
+
     }
 
     /**
@@ -58,6 +99,11 @@ public class nuevoProducto extends javax.swing.JPanel {
         jLabel6.setText("Proveedor:");
 
         guardar.setText("Guardar");
+        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarMouseClicked(evt);
+            }
+        });
 
         cancelar.setText("Cancelar");
 
@@ -84,11 +130,11 @@ public class nuevoProducto extends javax.swing.JPanel {
                     .addComponent(proveedor)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(categoria)
                     .addComponent(marca)
                     .addComponent(medida))
-                .addGap(154, 154, 154))
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +167,7 @@ public class nuevoProducto extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar)
                     .addComponent(cancelar))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -131,16 +177,20 @@ public class nuevoProducto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addContainerGap(403, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseClicked
+        
+    }//GEN-LAST:event_guardarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

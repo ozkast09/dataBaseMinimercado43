@@ -4,31 +4,44 @@
  */
 package com.mycompany.inventariobodega.DAO;
 
-import com.mycompany.inventariobodega.entidades.NombreProducto;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
 /**
  *
  * @author OSCAR
  */
+import com.mycompany.inventariobodega.entidades.NombreProducto;
+import jakarta.persistence.EntityManager;
+import com.mycompany.inventariobodega.util.JPAUtil; // Importa JPAUtil
+
 public class NombreProductoDao {
 
-    private final EntityManagerFactory emf;
-    private final EntityManager em;
-
-    public NombreProductoDao() {
-
-        emf = Persistence.createEntityManagerFactory("MiUnidadDePersistencia");
-        em = emf.createEntityManager();
+    public void guardar(NombreProducto nombreProducto) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(nombreProducto);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
-    
-    public void guardar (NombreProducto nombreProducto){
-        em.getTransaction().begin();
-        em.persist(nombreProducto);
-        em.getTransaction().commit();
-    
+    public NombreProducto obtenerPorNombre(String nombre) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("SELECT n FROM NombreProducto n WHERE n.nombre = :nombre", NombreProducto.class)
+                    .setParameter("nombre", nombre)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
-
 }

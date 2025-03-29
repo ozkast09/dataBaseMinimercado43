@@ -5,30 +5,29 @@
 package com.mycompany.inventariobodega.DAO;
 
 import com.mycompany.inventariobodega.entidades.BaseDatos;
-import com.mycompany.inventariobodega.entidades.NombreProducto;
+import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 /**
  *
  * @author OSCAR
  */
 public class BaseDatosDao {
-    private final EntityManagerFactory emf;
-    private final EntityManager em;
-
-    public BaseDatosDao() {
-
-        emf = Persistence.createEntityManagerFactory("MiUnidadDePersistencia");
-        em = emf.createEntityManager();
-    }
-    
-    public void guardar (BaseDatos baseDatos){
-        em.getTransaction().begin();
-        em.persist(baseDatos);
-        em.getTransaction().commit();
-    
+     public void guardar(BaseDatos baseDatos) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(baseDatos);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
     
 }

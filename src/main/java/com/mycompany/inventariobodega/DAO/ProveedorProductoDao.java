@@ -4,31 +4,45 @@
  */
 package com.mycompany.inventariobodega.DAO;
 
-import com.mycompany.inventariobodega.entidades.NombreProducto;
+
 import com.mycompany.inventariobodega.entidades.ProveedorProducto;
+import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 /**
  *
  * @author OSCAR
  */
 public class ProveedorProductoDao {
-    private final EntityManagerFactory emf;
-    private final EntityManager em;
-
-    public ProveedorProductoDao() {
-
-        emf = Persistence.createEntityManagerFactory("MiUnidadDePersistencia");
-        em = emf.createEntityManager();
+     public void guardar(ProveedorProducto proveedorProducto) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(proveedorProducto);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
-    
-    public void guardar (ProveedorProducto proveedorProducto){
-        em.getTransaction().begin();
-        em.persist(proveedorProducto);
-        em.getTransaction().commit();
-    
+     public ProveedorProducto obtenerPorProveedor(String proveedor) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("SELECT p FROM ProveedorProducto p WHERE p.proveedor = :proveedor", ProveedorProducto.class)
+                    .setParameter("proveedor", proveedor)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
     
 }

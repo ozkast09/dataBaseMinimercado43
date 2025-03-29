@@ -4,30 +4,46 @@
  */
 package com.mycompany.inventariobodega.DAO;
 
-import com.mycompany.inventariobodega.entidades.NombreProducto;
+
 import com.mycompany.inventariobodega.entidades.VencimientoProducto;
+import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import java.sql.Date;
 
 /**
  *
  * @author OSCAR
  */
 public class VencimientoProductoDao {
-    private final EntityManagerFactory emf;
-    private final EntityManager em;
-
-    public VencimientoProductoDao() {
-
-        emf = Persistence.createEntityManagerFactory("MiUnidadDePersistencia");
-        em = emf.createEntityManager();
+    public void guardar(VencimientoProducto venciminetoProducto) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(venciminetoProducto);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+     public VencimientoProducto obtenerPorFechaVencimiento(Date fechaVencimiento) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("SELECT v FROM VencimientoProducto v WHERE v.fechaVencimiento = :fechaVencimiento", VencimientoProducto.class)
+                    .setParameter("fechaVencimiento", fechaVencimiento)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
     
-    public void guardar (VencimientoProducto vencimientoProducto){
-        em.getTransaction().begin();
-        em.persist(vencimientoProducto);
-        em.getTransaction().commit();
-    
-    }
 }

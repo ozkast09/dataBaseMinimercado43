@@ -27,4 +27,8 @@ public class MedidaProducto {
     public void setId(int id) { this.id = id; }
     public String getMedida() { return medida; }
     public void setMedida(String medida) { this.medida = medida; }
+
+    public void setNombre(String medidaProducto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -4,32 +4,45 @@
  */
 package com.mycompany.inventariobodega.DAO;
 
+
 import com.mycompany.inventariobodega.entidades.MarcaProducto;
-import com.mycompany.inventariobodega.entidades.NombreProducto;
+import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 /**
  *
  * @author OSCAR
  */
 public class MarcaProductoDao {
-
-    private final EntityManagerFactory emf;
-    private final EntityManager em;
-
-    public MarcaProductoDao() {
-
-        emf = Persistence.createEntityManagerFactory("MiUnidadDePersistencia");
-        em = emf.createEntityManager();
+     public void guardar(MarcaProducto marcaProducto) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(marcaProducto);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
-    
-    public void guardar (MarcaProducto marcaProducto){
-        em.getTransaction().begin();
-        em.persist(marcaProducto);
-        em.getTransaction().commit();
-    
+     public MarcaProducto obtenerPorMarca(String marca) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("SELECT m FROM MarcaProducto m WHERE m.marca = :marca", MarcaProducto.class)
+                    .setParameter("marca", marca)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
     
 }

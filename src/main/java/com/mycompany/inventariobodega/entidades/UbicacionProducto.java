@@ -27,4 +27,8 @@ public class UbicacionProducto {
     public void setId(int id) { this.id = id; }
     public String getUbicacion() { return ubicacion; }
     public void setUbicacion(String ubicacion) { this.ubicacion = ubicacion; }
+
+    public void setNombre(String ubicacionProducto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

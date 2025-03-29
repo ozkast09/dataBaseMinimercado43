@@ -17,6 +17,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
      */
     public paginaPrincipal() {
         initComponents();
+        
 
     }
 
@@ -36,12 +37,15 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        JMenu = new javax.swing.JMenu();
-        JInventario = new javax.swing.JMenu();
-        JAgregar = new javax.swing.JMenu();
-        JSacar = new javax.swing.JMenu();
-        JVencimiento = new javax.swing.JMenu();
-        JNuevo = new javax.swing.JMenu();
+        inventario = new javax.swing.JMenu();
+        ingresarProducto = new javax.swing.JMenu();
+        menuInsertar = new javax.swing.JMenu();
+        nProducto = new javax.swing.JMenu();
+        nCategoria = new javax.swing.JMenu();
+        nMarca = new javax.swing.JMenu();
+        nMedida = new javax.swing.JMenu();
+        nProveedor = new javax.swing.JMenu();
+        nUbicacion = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
@@ -55,6 +59,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido.setBackground(new java.awt.Color(255, 255, 255));
         panelContenido.setLayout(new java.awt.BorderLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bienvenido usuario");
         panelContenido.add(jLabel1, java.awt.BorderLayout.CENTER);
@@ -63,43 +68,72 @@ public class paginaPrincipal extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
         );
 
-        JMenu.setText("Menu");
+        inventario.setText("Inventario");
+        jMenuBar1.add(inventario);
 
-        JInventario.setText("Inventario");
-        JMenu.add(JInventario);
+        ingresarProducto.setText("ingresar producto");
+        jMenuBar1.add(ingresarProducto);
 
-        JAgregar.setText("Agregar producto");
-        JMenu.add(JAgregar);
+        menuInsertar.setText("insertar nuevo dato");
 
-        JSacar.setText("sacar producto");
-        JMenu.add(JSacar);
-
-        JVencimiento.setText("fechas de vencimiento");
-        JMenu.add(JVencimiento);
-
-        JNuevo.setText("Nuevo producto");
-        JNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+        nProducto.setText("Nuevo producto");
+        nProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JNuevoMouseClicked(evt);
+                nProductoMouseClicked(evt);
             }
         });
-        JNuevo.addActionListener(new java.awt.event.ActionListener() {
+        nProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JNuevoActionPerformed(evt);
+                nProductoActionPerformed(evt);
             }
         });
-        JMenu.add(JNuevo);
+        menuInsertar.add(nProducto);
 
-        jMenuBar1.add(JMenu);
+        nCategoria.setText("Nueva categoria");
+        nCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nCategoriaMouseClicked(evt);
+            }
+        });
+        menuInsertar.add(nCategoria);
 
-        jMenu2.setText("Soporte");
+        nMarca.setText("Nueva marca");
+        nMarca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nMarcaMouseClicked(evt);
+            }
+        });
+        menuInsertar.add(nMarca);
+
+        nMedida.setText("Nueva medida");
+        nMedida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nMedidaMouseClicked(evt);
+            }
+        });
+        menuInsertar.add(nMedida);
+
+        nProveedor.setText("Nuevo proveedor");
+        menuInsertar.add(nProveedor);
+
+        nUbicacion.setText("Nueva ubicacion ");
+        nUbicacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nUbicacionMouseClicked(evt);
+            }
+        });
+        menuInsertar.add(nUbicacion);
+
+        jMenuBar1.add(menuInsertar);
+
+        jMenu2.setText("Manual de usuario");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -118,17 +152,54 @@ public class paginaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JNuevoActionPerformed
+    private void nProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nProductoActionPerformed
         
-    }//GEN-LAST:event_JNuevoActionPerformed
+    }//GEN-LAST:event_nProductoActionPerformed
 
-    private void JNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JNuevoMouseClicked
+    private void nProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nProductoMouseClicked
        panelContenido.removeAll();
         nuevoProducto panelProducto = new nuevoProducto();
         panelContenido.add(panelProducto, BorderLayout.CENTER);
         panelContenido.revalidate();
         panelContenido.repaint();
-    }//GEN-LAST:event_JNuevoMouseClicked
+    }//GEN-LAST:event_nProductoMouseClicked
+
+    private void nCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nCategoriaMouseClicked
+       
+        panelContenido.removeAll();
+        nuevaCategoria panelCategoria=new nuevaCategoria();
+        panelContenido.add(panelCategoria,BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }//GEN-LAST:event_nCategoriaMouseClicked
+
+    private void nMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nMarcaMouseClicked
+        
+        panelContenido.removeAll();
+        nuevaMarca panelMarca=new nuevaMarca();
+        panelContenido.add(panelMarca,BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }//GEN-LAST:event_nMarcaMouseClicked
+
+    private void nMedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nMedidaMouseClicked
+        
+        panelContenido.removeAll();
+        nuevaMedida panelMedida=new nuevaMedida();
+        panelContenido.add(panelMedida,BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }//GEN-LAST:event_nMedidaMouseClicked
+
+    private void nUbicacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nUbicacionMouseClicked
+
+        panelContenido.removeAll();
+        nuevaUbicacion panelUbicacion=new nuevaUbicacion();
+        panelContenido.add(panelUbicacion,BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+       
+    }//GEN-LAST:event_nUbicacionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -166,12 +237,8 @@ public class paginaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu JAgregar;
-    private javax.swing.JMenu JInventario;
-    private javax.swing.JMenu JMenu;
-    private javax.swing.JMenu JNuevo;
-    private javax.swing.JMenu JSacar;
-    private javax.swing.JMenu JVencimiento;
+    private javax.swing.JMenu ingresarProducto;
+    private javax.swing.JMenu inventario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -179,6 +246,13 @@ public class paginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenu menuInsertar;
+    private javax.swing.JMenu nCategoria;
+    private javax.swing.JMenu nMarca;
+    private javax.swing.JMenu nMedida;
+    private javax.swing.JMenu nProducto;
+    private javax.swing.JMenu nProveedor;
+    private javax.swing.JMenu nUbicacion;
     private javax.swing.JPanel panelContenido;
     // End of variables declaration//GEN-END:variables
 }

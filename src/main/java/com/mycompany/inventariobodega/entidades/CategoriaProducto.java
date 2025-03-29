@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.inventariobodega.entidades;
 
 import jakarta.persistence.Entity;
@@ -10,10 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- *
- * @author OSCAR
- */
 @Entity
 @Table(name = "categoriaproducto")
 public class CategoriaProducto {
@@ -27,4 +19,6 @@ public class CategoriaProducto {
     public void setId(int id) { this.id = id; }
     public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }
+
+   
 }

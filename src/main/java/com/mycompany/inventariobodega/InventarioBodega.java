@@ -4,6 +4,8 @@
 
 package com.mycompany.inventariobodega;
 
+import com.mycompany.inventariobodega.util.JPAUtil;
+
 /**
  *
  * @author OSCAR

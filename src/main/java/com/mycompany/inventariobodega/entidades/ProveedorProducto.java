@@ -27,5 +27,9 @@ public class ProveedorProducto {
     public void setId(int id) { this.id = id; }
     public String getProveedor() { return proveedor; }
     public void setProveedor(String proveedor) { this.proveedor = proveedor; }
+
+    public void setNombre(String proveedorProducto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
 
