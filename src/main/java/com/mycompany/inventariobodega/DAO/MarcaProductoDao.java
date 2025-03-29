@@ -8,12 +8,22 @@ package com.mycompany.inventariobodega.DAO;
 import com.mycompany.inventariobodega.entidades.MarcaProducto;
 import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 
 /**
  *
  * @author OSCAR
  */
 public class MarcaProductoDao {
+    
+    public List<MarcaProducto> obtenerTodos() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("SELECT n FROM MarcaProducto n", MarcaProducto.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
      public void guardar(MarcaProducto marcaProducto) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {

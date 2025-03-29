@@ -4,17 +4,33 @@
  */
 package com.mycompany.inventariobodega.forms;
 
+import com.mycompany.inventariobodega.DAO.ProveedorProductoDao;
+import com.mycompany.inventariobodega.entidades.ProveedorProducto;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author OSCAR
  */
 public class nuevoProveedor extends javax.swing.JPanel {
 
+    private final ProveedorProductoDao proveedorProductoDao;
+
     /**
      * Creates new form nuevoProveedor
      */
     public nuevoProveedor() {
         initComponents();
+
+        proveedorProductoDao = new ProveedorProductoDao();
+
+        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarMouseClicked(evt);
+            }
+        });
     }
 
     /**
@@ -27,14 +43,19 @@ public class nuevoProveedor extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        proveedor = new javax.swing.JTextField();
+        guardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nuevo Proveedor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jButton1.setText("Guardar");
+        guardar.setText("Guardar");
+        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarMouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -46,20 +67,20 @@ public class nuevoProveedor extends javax.swing.JPanel {
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(guardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(guardar)
                     .addComponent(jButton2))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -76,11 +97,45 @@ public class nuevoProveedor extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseClicked
+
+        guardar.setEnabled(false);
+
+        try {
+
+            String proveedorProducto = proveedor.getText().trim();
+
+            if (proveedorProducto.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un nuevo proveedor");
+                proveedor.requestFocus();
+                return;
+
+            }
+            ProveedorProducto existenteProveedor=proveedorProductoDao.obtenerPorProveedor(proveedorProducto);
+            
+            if (existenteProveedor==null) {
+                ProveedorProducto proveedorProductoEntidad=new ProveedorProducto();
+                proveedorProductoEntidad.setProveedor(proveedorProducto);
+                proveedorProductoDao.guardar(proveedorProductoEntidad);
+                
+                JOptionPane.showMessageDialog(null,"Datos guardados correctamente");
+                
+                proveedor.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null,"El proveedor ya existe, por favor ingrese un nuevo proveedor ");
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null,"Datos no almacenados");
+        } finally {
+            guardar.setEnabled(true);
+        }
+    }//GEN-LAST:event_guardarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton guardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField proveedor;
     // End of variables declaration//GEN-END:variables
 }

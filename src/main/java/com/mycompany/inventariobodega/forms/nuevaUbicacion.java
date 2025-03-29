@@ -105,10 +105,13 @@ public class nuevaUbicacion extends javax.swing.JPanel {
 
     private void guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseClicked
         
-        guardar.setEnabled(false);
+        guardar.setEnabled(false);// Deshabilita el botón al inicio
         try {
+            
+            // Obtener dato del text field
             String ubicacionProducto=ubicacion.getText().trim();
             
+            // Validación de datos
             if (ubicacionProducto.isEmpty()) {
                 JOptionPane.showMessageDialog(null,"Por favor, ingrese una nueva ubicacion");
                 ubicacion.requestFocus();
@@ -131,7 +134,7 @@ public class nuevaUbicacion extends javax.swing.JPanel {
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null,"Datos no almacenados");
         } finally {
-            guardar.setEnabled(true);
+            guardar.setEnabled(true);// Habilitar el botón al final
         }
     }//GEN-LAST:event_guardarMouseClicked
 

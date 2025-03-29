@@ -68,17 +68,22 @@ public class paginaPrincipal extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)
+            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
         );
 
         inventario.setText("Inventario");
         jMenuBar1.add(inventario);
 
         ingresarProducto.setText("ingresar producto");
+        ingresarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ingresarProductoMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(ingresarProducto);
 
         menuInsertar.setText("insertar nuevo dato");
@@ -121,6 +126,11 @@ public class paginaPrincipal extends javax.swing.JFrame {
         menuInsertar.add(nMedida);
 
         nProveedor.setText("Nuevo proveedor");
+        nProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nProveedorMouseClicked(evt);
+            }
+        });
         menuInsertar.add(nProveedor);
 
         nUbicacion.setText("Nueva ubicacion ");
@@ -200,6 +210,24 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido.repaint();
        
     }//GEN-LAST:event_nUbicacionMouseClicked
+
+    private void nProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nProveedorMouseClicked
+       
+        panelContenido.removeAll();
+        nuevoProveedor panelProveedor=new nuevoProveedor();
+        panelContenido.add(panelProveedor,BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }//GEN-LAST:event_nProveedorMouseClicked
+
+    private void ingresarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarProductoMouseClicked
+       
+        panelContenido.removeAll();
+        ingresarProducto panelIngresar= new ingresarProducto();
+        panelContenido.add(panelIngresar,BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }//GEN-LAST:event_ingresarProductoMouseClicked
 
     /**
      * @param args the command line arguments

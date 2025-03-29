@@ -31,6 +31,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="ingresar producto"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ingresarProductoMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuInsertar">
           <Properties>
@@ -74,6 +77,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nuevo proveedor"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nProveedorMouseClicked"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="nUbicacion">
               <Properties>
@@ -131,12 +137,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="panelContenido" alignment="0" pref="868" max="32767" attributes="0"/>
+              <Component id="panelContenido" alignment="0" pref="855" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="panelContenido" alignment="0" pref="468" max="32767" attributes="0"/>
+              <Component id="panelContenido" alignment="0" pref="391" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

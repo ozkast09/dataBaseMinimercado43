@@ -5,15 +5,26 @@
 package com.mycompany.inventariobodega.DAO;
 
 
+
 import com.mycompany.inventariobodega.entidades.ProveedorProducto;
 import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 
 /**
  *
  * @author OSCAR
  */
 public class ProveedorProductoDao {
+    
+    public List<ProveedorProducto> obtenerTodos() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("SELECT n FROM ProveedorProducto n", ProveedorProducto.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
      public void guardar(ProveedorProducto proveedorProducto) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {

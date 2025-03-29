@@ -6,6 +6,7 @@ package com.mycompany.inventariobodega.forms;
 
 import com.mycompany.inventariobodega.DAO.MedidaProductoDao;
 import com.mycompany.inventariobodega.entidades.MedidaProducto;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +46,8 @@ public class nuevaMedida extends javax.swing.JPanel {
         medida = new javax.swing.JTextField();
         guardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nueva Medida", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -131,7 +134,7 @@ public class nuevaMedida extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null,"Medida ya registrada, por favor ingrese otra medida");
             }
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null,"Datos no almacenados");
         } finally {
             guardar.setEnabled(true);// habilita el boton guardar

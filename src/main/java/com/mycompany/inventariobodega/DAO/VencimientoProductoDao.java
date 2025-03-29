@@ -5,16 +5,27 @@
 package com.mycompany.inventariobodega.DAO;
 
 
+import com.mycompany.inventariobodega.entidades.NombreProducto;
 import com.mycompany.inventariobodega.entidades.VencimientoProducto;
 import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
  * @author OSCAR
  */
 public class VencimientoProductoDao {
+    
+    public List<NombreProducto> obtenerTodos() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("SELECT n FROM NombreProducto n", NombreProducto.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public void guardar(VencimientoProducto venciminetoProducto) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
