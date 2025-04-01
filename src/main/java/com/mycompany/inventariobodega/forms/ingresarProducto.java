@@ -11,21 +11,26 @@ import com.mycompany.inventariobodega.DAO.MedidaProductoDao;
 import com.mycompany.inventariobodega.DAO.NombreProductoDao;
 import com.mycompany.inventariobodega.DAO.ProveedorProductoDao;
 import com.mycompany.inventariobodega.DAO.UbicacionProductoDao;
+import com.mycompany.inventariobodega.entidades.BaseDatos;
 import com.mycompany.inventariobodega.entidades.CategoriaProducto;
 import com.mycompany.inventariobodega.entidades.MarcaProducto;
 import com.mycompany.inventariobodega.entidades.MedidaProducto;
 import com.mycompany.inventariobodega.entidades.NombreProducto;
+import com.mycompany.inventariobodega.entidades.ProveedorProducto;
 import com.mycompany.inventariobodega.entidades.UbicacionProducto;
+import java.awt.event.ActionEvent;
+
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author OSCAR
  */
 public class ingresarProducto extends javax.swing.JPanel {
-    
+
     private final NombreProductoDao nombreProductoDao;
     private final MarcaProductoDao marcaProductoDao;
     private final CategoriProductoDao categoriaProductoDao;
@@ -39,25 +44,26 @@ public class ingresarProducto extends javax.swing.JPanel {
      */
     public ingresarProducto() {
         initComponents();
-        
-        nombreProductoDao=new NombreProductoDao();
-        marcaProductoDao =new MarcaProductoDao();
-        categoriaProductoDao=new CategoriProductoDao();
-        medidaProductoDao=new MedidaProductoDao();
-        ubicacionProductoDao=new UbicacionProductoDao();
-        proveedorProductoDao=new ProveedorProductoDao();
-        baseDatosDao= new BaseDatosDao();
-        
+
+        nombreProductoDao = new NombreProductoDao();
+        marcaProductoDao = new MarcaProductoDao();
+        categoriaProductoDao = new CategoriProductoDao();
+        medidaProductoDao = new MedidaProductoDao();
+        ubicacionProductoDao = new UbicacionProductoDao();
+        proveedorProductoDao = new ProveedorProductoDao();
+        baseDatosDao = new BaseDatosDao();
+
         cargarCombos();
-        
+
     }
-    
-     private void cargarCombos() {
+
+    private void cargarCombos() {
         cargarCombo(comboNombre, nombreProductoDao.obtenerTodos());
         cargarCombo(comboMarca, marcaProductoDao.obtenerTodos());
         cargarCombo(comboCategoria, categoriaProductoDao.obtenerTodos());
         cargarCombo(comboMedida, medidaProductoDao.obtenerTodos());
         cargarCombo(comboUbicacion, ubicacionProductoDao.obtenerTodos());
+        cargarCombo(comboProveedor, proveedorProductoDao.obtenerTodos());
     }
 
     private <T> void cargarCombo(javax.swing.JComboBox<String> combo, List<T> lista) {
@@ -73,12 +79,13 @@ public class ingresarProducto extends javax.swing.JPanel {
                 model.addElement(medidaProducto.getMedida());
             } else if (item instanceof UbicacionProducto ubicacionProducto) {
                 model.addElement(ubicacionProducto.getUbicacion());
+            } else if (item instanceof ProveedorProducto proveedorProducto) { // Agregado para Proveedor
+                model.addElement(proveedorProducto.getProveedor());
             }
+
         }
         combo.setModel(model);
     }
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,6 +111,8 @@ public class ingresarProducto extends javax.swing.JPanel {
         comboUbicacion = new javax.swing.JComboBox<>();
         guardar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        comboProveedor = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -123,8 +132,20 @@ public class ingresarProducto extends javax.swing.JPanel {
         jLabel6.setText("Ubicacion:");
 
         guardar.setText("Guardar");
+        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarMouseClicked(evt);
+            }
+        });
 
         cancelar.setText("Cancelar");
+        cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelarMouseClicked(evt);
+            }
+        });
+
+        jLabel7.setText("Proveedor:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,14 +175,17 @@ public class ingresarProducto extends javax.swing.JPanel {
                             .addComponent(comboMedida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboUbicacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(guardar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelar))
-                            .addComponent(comboUbicacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(comboProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -191,11 +215,15 @@ public class ingresarProducto extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(comboUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar)
                     .addComponent(cancelar))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -210,10 +238,71 @@ public class ingresarProducto extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 9, Short.MAX_VALUE)
+                .addGap(0, 6, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseClicked
+
+        try {
+            // Obtener las entidades individuales de las listas
+        List<NombreProducto> nombres = nombreProductoDao.obtenerTodos();
+        NombreProducto nombreProducto = nombres.get(comboNombre.getSelectedIndex());
+
+        List<MarcaProducto> marcas = marcaProductoDao.obtenerTodos();
+        MarcaProducto marcaProducto = marcas.get(comboMarca.getSelectedIndex());
+
+        List<CategoriaProducto> categorias = categoriaProductoDao.obtenerTodos();
+        CategoriaProducto categoriaProducto = categorias.get(comboCategoria.getSelectedIndex());
+
+        List<MedidaProducto> medidas = medidaProductoDao.obtenerTodos();
+        MedidaProducto medidaProducto = medidas.get(comboMedida.getSelectedIndex());
+
+        List<UbicacionProducto> ubicaciones = ubicacionProductoDao.obtenerTodos();
+        UbicacionProducto ubicacionProducto = ubicaciones.get(comboUbicacion.getSelectedIndex());
+
+        List<ProveedorProducto> proveedores = proveedorProductoDao.obtenerTodos();
+        ProveedorProducto proveedorProducto = proveedores.get(comboProveedor.getSelectedIndex());
+
+        int cantidadIngresada = Integer.parseInt(cantidad.getText());
+
+            // 2. Verificar si el producto ya existe en la tabla basedatos
+            BaseDatos existente = baseDatosDao.obtenerPorNombre(nombreProducto.getId());
+
+            // 3. Guardar o actualizar el producto
+            if (existente == null) {
+                // El producto no existe, crear uno nuevo
+                BaseDatos nuevo = new BaseDatos();
+                nuevo.setFknombreproducto(nombreProducto.getId());
+                nuevo.setFkmarcaproducto(marcaProducto.getId());
+                nuevo.setFkcategoriaproducto(categoriaProducto.getId());
+                nuevo.setFkmedidaproducto(medidaProducto.getId());
+                nuevo.setFkubicacionproducto(ubicacionProducto.getId());
+                nuevo.setFkproveedorproducto(proveedorProducto.getId());
+                nuevo.setStock(cantidadIngresada);
+                baseDatosDao.guardar(nuevo);
+                JOptionPane.showMessageDialog(this, "Producto agregado correctamente.");
+            } else {
+                // El producto ya existe, actualizar el stock
+                int nuevoStock = existente.getStock() + cantidadIngresada;
+                existente.setStock(nuevoStock);
+                baseDatosDao.actualizar(existente);
+                JOptionPane.showMessageDialog(this, "Stock actualizado correctamente.");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar el producto.");
+            e.printStackTrace(); // Registrar la excepción para depuración
+        }
+
+    }//GEN-LAST:event_guardarMouseClicked
+
+    private void cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMouseClicked
+      
+    }//GEN-LAST:event_cancelarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,6 +312,7 @@ public class ingresarProducto extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboMarca;
     private javax.swing.JComboBox<String> comboMedida;
     private javax.swing.JComboBox<String> comboNombre;
+    private javax.swing.JComboBox<String> comboProveedor;
     private javax.swing.JComboBox<String> comboUbicacion;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
@@ -231,6 +321,7 @@ public class ingresarProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

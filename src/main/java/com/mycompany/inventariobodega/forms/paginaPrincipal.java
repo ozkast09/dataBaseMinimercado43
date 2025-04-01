@@ -10,11 +10,10 @@ import java.awt.BorderLayout;
  *
  * @author OSCAR
  */
+// ventana de aplicacion
 public class paginaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form paginaPrincipal
-     */
+    //constructor
     public paginaPrincipal() {
         initComponents();
         
@@ -76,6 +75,11 @@ public class paginaPrincipal extends javax.swing.JFrame {
         );
 
         inventario.setText("Inventario");
+        inventario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inventarioMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(inventario);
 
         ingresarProducto.setText("ingresar producto");
@@ -166,14 +170,17 @@ public class paginaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_nProductoActionPerformed
 
+    //accion para traer jpanel de nuevo producto
     private void nProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nProductoMouseClicked
-       panelContenido.removeAll();
-        nuevoProducto panelProducto = new nuevoProducto();
-        panelContenido.add(panelProducto, BorderLayout.CENTER);
-        panelContenido.revalidate();
-        panelContenido.repaint();
+       panelContenido.removeAll();// elimina los componentes existentes del panelControl
+        nuevoProducto panelProducto = new nuevoProducto();// crea una nueva instancia del panel
+        panelContenido.add(panelProducto, BorderLayout.CENTER); //agrega un nuevo panel
+        panelContenido.revalidate();// revalida para que los cambios se reflejen
+        panelContenido.repaint();//redibuja el panelContenido para mostrar los cambios visuales
+        // las mismas funciones se ejecutan para cada accion
     }//GEN-LAST:event_nProductoMouseClicked
 
+    //accion para traer jpanel para ingresar una nueva categoria
     private void nCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nCategoriaMouseClicked
        
         panelContenido.removeAll();
@@ -183,6 +190,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido.repaint();
     }//GEN-LAST:event_nCategoriaMouseClicked
 
+    //accion para traer jpanel de nueva marca
     private void nMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nMarcaMouseClicked
         
         panelContenido.removeAll();
@@ -192,6 +200,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido.repaint();
     }//GEN-LAST:event_nMarcaMouseClicked
 
+    //accion para traer jpanel de nueva medida
     private void nMedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nMedidaMouseClicked
         
         panelContenido.removeAll();
@@ -201,6 +210,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido.repaint();
     }//GEN-LAST:event_nMedidaMouseClicked
 
+    //accion para traer jpanel de nueva ubicacion
     private void nUbicacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nUbicacionMouseClicked
 
         panelContenido.removeAll();
@@ -211,6 +221,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_nUbicacionMouseClicked
 
+    //accion para traer jpanel de nuevo proveedor
     private void nProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nProveedorMouseClicked
        
         panelContenido.removeAll();
@@ -220,6 +231,7 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido.repaint();
     }//GEN-LAST:event_nProveedorMouseClicked
 
+    //accion para traer jpanel de nuevo producto
     private void ingresarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarProductoMouseClicked
        
         panelContenido.removeAll();
@@ -229,9 +241,20 @@ public class paginaPrincipal extends javax.swing.JFrame {
         panelContenido.repaint();
     }//GEN-LAST:event_ingresarProductoMouseClicked
 
+    //accion para traer jpanel del inventario
+    private void inventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventarioMouseClicked
+      
+        panelContenido.removeAll();
+        inventario panelInventario=new inventario();
+        panelContenido.add(panelInventario,BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }//GEN-LAST:event_inventarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
+    //
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

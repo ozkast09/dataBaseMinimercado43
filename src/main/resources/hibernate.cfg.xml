@@ -9,3 +9,15 @@
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <mapping class="com.mycompany.inventariobodega.entidades.NombreProducto"/>
+        <mapping class="com.mycompany.inventariobodega.entidades.MarcaProducto"/>
+        <mapping class="com.mycompany.inventariobodega.entidades.CategoriaProducto"/>
+        <mapping class="com.mycompany.inventariobodega.entidades.MedidaProducto"/>
+        <mapping class="com.mycompany.inventariobodega.entidades.UbicacionProducto"/>
+        <mapping class="com.mycompany.inventariobodega.entidades.ProveedorProducto"/>
+        <mapping class="com.mycompany.inventariobodega.entidades.BaseDatos"/>
+        </session-factory>
+</hibernate-configuration>
+

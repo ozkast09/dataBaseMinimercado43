@@ -5,10 +5,13 @@
 package com.mycompany.inventariobodega.DAO;
 
 
+import HibernateUtil.HibernateUtil;
 import com.mycompany.inventariobodega.entidades.MarcaProducto;
 import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -53,6 +56,23 @@ public class MarcaProductoDao {
                 em.close();
             }
         }
+    }
+
+    public MarcaProducto obtenerPorId(int id){
+     
+         Transaction transaction=null;
+         MarcaProducto categoriaProducto=null;
+          try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            categoriaProducto = session.get(MarcaProducto.class, id);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return categoriaProducto;
     }
     
 }

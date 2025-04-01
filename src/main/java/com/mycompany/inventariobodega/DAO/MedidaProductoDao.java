@@ -5,10 +5,13 @@
 package com.mycompany.inventariobodega.DAO;
 
 
+import HibernateUtil.HibernateUtil;
 import com.mycompany.inventariobodega.entidades.MedidaProducto;
 import com.mycompany.inventariobodega.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -55,4 +58,20 @@ public class MedidaProductoDao {
         }
     }
     
+     public MedidaProducto obtenerPorId(int id){
+     
+         Transaction transaction=null;
+         MedidaProducto categoriaProducto=null;
+          try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            categoriaProducto = session.get(MedidaProducto.class, id);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return categoriaProducto;
+    }
 }

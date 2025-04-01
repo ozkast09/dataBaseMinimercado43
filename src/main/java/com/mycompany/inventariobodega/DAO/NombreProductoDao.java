@@ -8,13 +8,19 @@ package com.mycompany.inventariobodega.DAO;
  *
  * @author OSCAR
  */
+import HibernateUtil.HibernateUtil;
 import com.mycompany.inventariobodega.entidades.NombreProducto;
 import jakarta.persistence.EntityManager;
 import com.mycompany.inventariobodega.util.JPAUtil; // Importa JPAUtil
+import jakarta.transaction.SystemException;
+import org.hibernate.Transaction;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.hibernate.Session;
 
 public class NombreProductoDao {
-    
+
     public List<NombreProducto> obtenerTodos() {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
@@ -40,6 +46,7 @@ public class NombreProductoDao {
             }
         }
     }
+
     public NombreProducto obtenerPorNombre(String nombre) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
@@ -54,4 +61,26 @@ public class NombreProductoDao {
             }
         }
     }
+    
+    public NombreProducto obtenerPorId(int id) {
+        Transaction transaction = null;
+        NombreProducto nombreProducto = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = (Transaction) session.beginTransaction();
+            nombreProducto = session.get(NombreProducto.class, id);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                try {
+                    transaction.rollback();
+                } catch (IllegalStateException ex) {
+                    Logger.getLogger(NombreProductoDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            e.printStackTrace();
+        }
+        return nombreProducto;
+    }
+
+   
 }
