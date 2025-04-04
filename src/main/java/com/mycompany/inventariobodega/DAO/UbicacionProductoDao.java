@@ -20,6 +20,8 @@ import org.hibernate.Transaction;
  */
 public class UbicacionProductoDao {
     
+    /*tiene la función principal de recuperar y 
+    devolver una lista que contiene todas las instancias de la entidad BaseDatos que existen actualmente en la base de datos.*/
     public List<UbicacionProducto> obtenerTodos() {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
@@ -61,6 +63,7 @@ public class UbicacionProductoDao {
         }
     }
     
+    //tiene la función principal de buscar y recuperar una única instancia de la entidad BaseDatos de la base de datos
     public UbicacionProducto obtenerPorId(int id){
      
          Transaction transaction=null;

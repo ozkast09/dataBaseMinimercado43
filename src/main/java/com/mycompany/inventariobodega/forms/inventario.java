@@ -26,9 +26,11 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author OSCAR
+ * Este código Java define un panel (inventario) que muestra una tabla con datos de inventario de la bodega. 
  */
 public class inventario extends javax.swing.JPanel {
 
+    //Declaración de Variables de Instancia
     private final BaseDatosDao baseDatosDao;
     private final NombreProductoDao nombreProductoDao;
     private final MarcaProductoDao marcaProductoDao;
@@ -37,9 +39,11 @@ public class inventario extends javax.swing.JPanel {
     private final UbicacionProductoDao ubicacionProductoDao;
     private final ProveedorProductoDao proveedorProductoDao;
     
+    //constructor
     public inventario() {
         initComponents();
         
+        // Inicializa las variables de instancia de los DAOs.
         baseDatosDao = new BaseDatosDao();
         nombreProductoDao = new NombreProductoDao();
         marcaProductoDao = new MarcaProductoDao();
@@ -47,15 +51,19 @@ public class inventario extends javax.swing.JPanel {
         medidaProductoDao = new MedidaProductoDao();
         ubicacionProductoDao = new UbicacionProductoDao();
         proveedorProductoDao = new ProveedorProductoDao();
-        cargarDatosTabla();
+        cargarDatosTabla();//Llama al método para cargar los datos en la tabla
+        
     }
 
     private List<BaseDatosTabla> obtenerDatosTabla() {
-        List<BaseDatos> baseDatosList = baseDatosDao.obtenerTodos();
-        List<BaseDatosTabla> datosTabla = new ArrayList<>();
+        List<BaseDatos> baseDatosList = baseDatosDao.obtenerTodos();//Obtiene una lista de todos los registros de la tabla BaseDatos
+        List<BaseDatosTabla> datosTabla = new ArrayList<>();//Crea una lista para almacenar los datos que se mostrarán en la tabla.
 
+        //Bucle for: Itera a través de la lista de registros BaseDatos
         for (BaseDatos baseDatos : baseDatosList) {
             try {
+                
+            // obtener entidades relacionadas
             NombreProducto nombreProducto = nombreProductoDao.obtenerPorId(baseDatos.getFknombreproducto());
             MarcaProducto marcaProducto = marcaProductoDao.obtenerPorId(baseDatos.getFkmarcaproducto());
             CategoriaProducto categoriaProducto = categoriaProductoDao.obtenerPorId(baseDatos.getFkcategoriaproducto());
@@ -74,7 +82,6 @@ public class inventario extends javax.swing.JPanel {
             );
             datosTabla.add(baseDatosTabla);
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return datosTabla;

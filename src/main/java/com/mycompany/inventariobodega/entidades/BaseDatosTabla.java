@@ -6,14 +6,15 @@ package com.mycompany.inventariobodega.entidades;
 
 /**
  *
- * @author OSCAR
+ * @author OSCAR - Este código Java define una clase llamada BaseDatosTabla, que
+ * se utiliza para representar los datos que se mostrarán en una tabla de una
+ * interfaz gráfica de usuario (GUI) relacionada con el inventario de bodega.
  */
-
 //declaracion de la clase
 public class BaseDatosTabla {
-    
+
     //declaracion de variables de instancia
-     private String nombreProducto;
+    private String nombreProducto;
     private String marcaProducto;
     private String categoriaProducto;
     private String medidaProducto;
@@ -23,6 +24,8 @@ public class BaseDatosTabla {
 
     // Constructor
     public BaseDatosTabla(String nombreProducto, String marcaProducto, String categoriaProducto, String medidaProducto, String ubicacionProducto, String proveedorProducto, int stock) {
+
+        //Recibe como parámetros los valores iniciales para cada una de las variables de instancia.
         this.nombreProducto = nombreProducto;
         this.marcaProducto = marcaProducto;
         this.categoriaProducto = categoriaProducto;
@@ -88,5 +91,5 @@ public class BaseDatosTabla {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
+
 }

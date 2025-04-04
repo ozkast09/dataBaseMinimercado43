@@ -23,6 +23,7 @@ public class BaseDatosDao {
      
      
 
+     //Este método se utiliza cuando quieres crear un nuevo registro en la tabla de la base de datos que corresponde a la entidad BaseDatos
     public void guardar(BaseDatos baseDatos) throws PersistenceException {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -43,6 +44,7 @@ public class BaseDatosDao {
         }
     }
 
+    //tiene la función principal de buscar y recuperar una única instancia de la entidad BaseDatos de la base de datos
     public BaseDatos obtenerPorNombre(int id) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
@@ -58,6 +60,8 @@ public class BaseDatosDao {
         }
     }
 
+     /*El método actualizar(BaseDatos existente) 
+     tiene la función principal de modificar un registro existente de la entidad BaseDatos en la base de datos */
     public void actualizar(BaseDatos existente) throws PersistenceException {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -78,6 +82,9 @@ public class BaseDatosDao {
         }
     }
     
+   
+    /*tiene la función principal de recuperar y 
+    devolver una lista que contiene todas las instancias de la entidad BaseDatos que existen actualmente en la base de datos.*/
     public List<BaseDatos> obtenerTodos() {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {

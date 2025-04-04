@@ -9,6 +9,8 @@ import java.awt.BorderLayout;
 /**
  *
  * @author OSCAR
+ * 
+ * Este programa Java define una interfaz gráfica de usuario (GUI) para una aplicación de inventario de bodega. 
  */
 // ventana de aplicacion
 public class paginaPrincipal extends javax.swing.JFrame {
